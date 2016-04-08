@@ -15,5 +15,5 @@ public interface CategoryService {
 
     public Category update(Category category);
 
-    public Category delete(Category category);
+    public Category delete(long id);
 }
