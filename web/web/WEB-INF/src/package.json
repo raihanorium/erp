@@ -1,0 +1,26 @@
+{
+  "name": "tutorial",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/raihanorium/erp.git"
+  },
+  "keywords": [
+    "tutorial",
+    "site"
+  ],
+  "author": "raihan.dk@gmail.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/raihanorium/erp/issues"
+  },
+  "homepage": "https://github.com/raihanorium/erp#readme",
+  "dependencies": {
+    "angular": "^1.5.3"
+  }
+}
