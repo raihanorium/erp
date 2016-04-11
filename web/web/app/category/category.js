@@ -3,16 +3,24 @@
 angular.module('myApp.category', ['ngRoute', 'ngResource'])
 
     .config(['$routeProvider', function ($routeProvider) {
-        $routeProvider.when('/category', {
-            templateUrl: 'category/category.html',
-            controller: 'CategoryCtrl'
-        });
+        $routeProvider
+            .when('/category', {
+                templateUrl: 'category/category.html',
+                controller: 'CategoryCtrl'
+            })
+            .when('/category/:id', {
+                templateUrl: 'category/category-detail.html',
+                controller: 'CategoryDetailCtrl'
+            })
+        ;
     }])
 
     .controller('CategoryCtrl', ['$scope', 'CategoryService', function ($scope, CategoryService) {
-        $scope.lst = CategoryService.getAll();
-        $scope.id = 11;
-        $scope.single = CategoryService.get($scope.id);
+        $scope.categories = CategoryService.getAll();
+    }])
+
+    .controller('CategoryDetailCtrl', ['$scope', '$routeParams', 'CategoryService', function ($scope, $routeParams, CategoryService) {
+        $scope.single = CategoryService.get($routeParams.id);
     }])
 
     .factory('CategoryService', ['$resource', function ($resource) {
