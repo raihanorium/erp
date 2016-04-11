@@ -29,7 +29,6 @@ public class AuthenticationInterceptor extends HandlerInterceptorAdapter {
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
         long startTime = (Long) request.getAttribute("startTime");
-        logger.info("Request URL: [" + request.getServletPath()
-                + "], Time Taken: " + (System.currentTimeMillis() - startTime) + "ms.");
+        logger.info(String.format("%s [%s], Time Taken: %s ms.", request.getMethod(), request.getRequestURI(), (System.currentTimeMillis() - startTime)));
     }
 }
