@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Raihan on 4/9/2016.
@@ -31,20 +33,28 @@ public class CategoryController {
     }
 
     @RequestMapping(value = "", method = RequestMethod.GET)
-    public List<Category> getAllCategory() {
-        return categoryService.getAll(Config.DEFAULT_PAGE_SIZE, 0);
+    public Map getAllCategory() {
+        Map response = new HashMap();
+        response.put("total", categoryService.getTotal());
+        response.put("categories", categoryService.getAll(Config.DEFAULT_PAGE_SIZE, 0));
+        return response;
     }
 
     @RequestMapping(value = "/page/{page}", method = RequestMethod.GET)
-    public List<Category> getAllCategory(@PathVariable int page) {
+    public Map getAllCategory(@PathVariable int page) {
         List<Category> allCategories = new ArrayList<Category>();
 
-        if (page == 0 || page == 1) {
+        if (page <= 1) {
             allCategories = categoryService.getAll(Config.DEFAULT_PAGE_SIZE, 0);
         } else {
-            allCategories = categoryService.getAll(Config.DEFAULT_PAGE_SIZE, (page * Config.DEFAULT_PAGE_SIZE));
+            allCategories = categoryService.getAll(Config.DEFAULT_PAGE_SIZE, ((page - 1) * Config.DEFAULT_PAGE_SIZE));
         }
-        return allCategories;
+
+        Map response = new HashMap();
+        response.put("total", categoryService.getTotal());
+        response.put("categories", allCategories);
+
+        return response;
     }
 
     @RequestMapping(value = "", method = RequestMethod.PUT)

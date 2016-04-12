@@ -13,6 +13,8 @@ public interface CategoryService {
     public Category get(long id);
     public List<Category> getAll(int limit, int offset);
 
+    public long getTotal();
+
     public Category update(Category category);
 
     public Category delete(long id);
