@@ -28,7 +28,7 @@ angular.module('myApp.category', ['ngRoute', 'ngResource'])
 
         return {
             getAll: function () {
-                return $resource(baseUrl).query();
+                return $resource(baseUrl).get();
             },
             get: function (id) {
                 return $resource(baseUrl + '/:id').get({id: id});

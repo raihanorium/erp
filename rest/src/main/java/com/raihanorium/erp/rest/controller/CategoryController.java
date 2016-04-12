@@ -35,7 +35,7 @@ public class CategoryController {
     @RequestMapping(value = "", method = RequestMethod.GET)
     public Map getAllCategory() {
         Map response = new HashMap();
-        response.put("total", categoryService.getTotal());
+        response.put("paging", getPagingInfo());
         response.put("categories", categoryService.getAll(Config.DEFAULT_PAGE_SIZE, 0));
         return response;
     }
@@ -51,7 +51,7 @@ public class CategoryController {
         }
 
         Map response = new HashMap();
-        response.put("total", categoryService.getTotal());
+        response.put("paging", getPagingInfo());
         response.put("categories", allCategories);
 
         return response;
@@ -65,5 +65,13 @@ public class CategoryController {
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public Category deleteCategory(@PathVariable long id) {
         return categoryService.delete(id);
+    }
+
+    private Map getPagingInfo() {
+        Map pagingInfo = new HashMap();
+        pagingInfo.put("pageSize", Config.DEFAULT_PAGE_SIZE);
+        pagingInfo.put("total", categoryService.getTotal());
+
+        return pagingInfo;
     }
 }
